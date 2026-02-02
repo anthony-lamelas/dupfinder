@@ -1,1 +1,13 @@
 .vscode/
+
+build/
+bin/
+obj/
+
+*.o
+*.d
+*.so
+*.exe
+
+googletest/
+*.tar.gz

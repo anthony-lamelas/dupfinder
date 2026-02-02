@@ -23,3 +23,38 @@ project "dupfinder"
 
     filter "configurations:Release"
         optimize "Speed"
+
+project "dupfinder_tests"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++20"
+
+    targetdir "bin/%{cfg.buildcfg}"
+
+    files {
+        "tests/**.cpp",
+        "src/hash.cpp",
+        "src/search.cpp",
+        "src/xxhash.c"
+    }
+
+    includedirs {
+        "include",
+        "googletest/googletest/include"
+    }
+
+    libdirs {
+        "googletest/build/lib"
+    }
+
+    links {
+        "gtest",
+        "pthread"
+    }
+
+    filter "configurations:Debug"
+        symbols "On"
+        optimize "Off"
+
+    filter "configurations:Release"
+        optimize "Speed"

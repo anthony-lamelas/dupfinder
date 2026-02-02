@@ -10,15 +10,17 @@ endif
 
 ifeq ($(config),debug)
   dupfinder_config = debug
+  dupfinder_tests_config = debug
 
 else ifeq ($(config),release)
   dupfinder_config = release
+  dupfinder_tests_config = release
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := dupfinder
+PROJECTS := dupfinder dupfinder_tests
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -30,8 +32,15 @@ ifneq (,$(dupfinder_config))
 	@${MAKE} --no-print-directory -C . -f dupfinder.make config=$(dupfinder_config)
 endif
 
+dupfinder_tests:
+ifneq (,$(dupfinder_tests_config))
+	@echo "==== Building dupfinder_tests ($(dupfinder_tests_config)) ===="
+	@${MAKE} --no-print-directory -C . -f dupfinder_tests.make config=$(dupfinder_tests_config)
+endif
+
 clean:
 	@${MAKE} --no-print-directory -C . -f dupfinder.make clean
+	@${MAKE} --no-print-directory -C . -f dupfinder_tests.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -44,5 +53,6 @@ help:
 	@echo "   all (default)"
 	@echo "   clean"
 	@echo "   dupfinder"
+	@echo "   dupfinder_tests"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

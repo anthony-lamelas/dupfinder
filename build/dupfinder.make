@@ -37,7 +37,7 @@ endef
 ifeq ($(config),debug)
 TARGETDIR = ../bin/Debug
 TARGET = $(TARGETDIR)/dupfinder
-OBJDIR = obj/Debug
+OBJDIR = obj/Debug/dupfinder
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O0 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O0 -g -std=c++20
 ALL_LDFLAGS += $(LDFLAGS)
@@ -45,7 +45,7 @@ ALL_LDFLAGS += $(LDFLAGS)
 else ifeq ($(config),release)
 TARGETDIR = ../bin/Release
 TARGET = $(TARGETDIR)/dupfinder
-OBJDIR = obj/Release
+OBJDIR = obj/Release/dupfinder
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O3
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O3 -std=c++20
 ALL_LDFLAGS += $(LDFLAGS) -s
