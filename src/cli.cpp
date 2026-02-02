@@ -2,6 +2,9 @@
 #include <vector>
 #include <filesystem>
 
+#include "../include/search.hpp"
+#include "../include/hash.hpp"
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cout << "Not enough arguments." << std::endl;
@@ -14,8 +17,17 @@ int main(int argc, char* argv[]) {
         directories.emplace_back(argv[i]);
     }
 
-    // need to scan directories and check hashes
-    // then need to format the output response
+    auto size_groups = scan_directories(directories);
+    auto duplicates = check_hashes(size_groups);
+
+    for (const auto& [size, hash_map] : duplicates) {
+        for (const auto& [hash, files] : hash_map) {
+            std::cout << "New Set of Duplicates of size " << size << " MB" << std::endl;
+            for (const auto& path : files) {
+                std::cout << path << std::endl;
+            }
+        }
+    }
 
     return 0;
 }
